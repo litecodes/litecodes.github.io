@@ -1,0 +1,19 @@
+{
+  "name": "litecodes.github.io",
+  "version": "1.0.0",
+  "description": "LiteCodes Website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/litecodes/litecodes.github.io.git"
+  },
+  "author": "kermit.oauth@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/litecodes/litecodes.github.io/issues"
+  },
+  "homepage": "https://github.com/litecodes/litecodes.github.io#readme"
+}

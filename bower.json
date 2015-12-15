@@ -1,0 +1,29 @@
+{
+  "name": "litecodes.github.io",
+  "description": "LiteCodes Website",
+  "main": "index.js",
+  "authors": [
+    "kermit.oauth@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/litecodes/litecodes.github.io",
+  "moduleType": [
+    "amd"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "markdown": "~0.5.0",
+    "font-awesome": "fontawesome#~4.5.0",
+    "highlightjs": "~9.0.0",
+    "requirejs": "~2.1.22",
+    "jquery": "~2.1.4",
+    "three.js": "threejs#*"
+  }
+}
