@@ -12,5 +12,6 @@ require.config( {
     shim   : {
         'CanvasRenderer': [ 'threejs', 'Projector' ],
         'Projector'     : [ 'threejs' ]
-    }
+    },
+    waitSeconds: 120
 } );
