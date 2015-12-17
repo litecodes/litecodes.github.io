@@ -35,79 +35,91 @@ define( [ 'threejs', 'CanvasRenderer' ], function () {
         near   = 1,
         far    = 1000000;
 
-    var loader = new THREE.TextureLoader();
-
     var canvas   = document.querySelector( '#glCanvas' );
     var renderer = createContext( canvas );
     renderer.setClearColor( 0x000000 );
     renderer.setSize( window.innerWidth, window.innerHeight );
     renderer.setPixelRatio( window.devicePixelRatio );
+    renderer.gammaInput        = true;
+    renderer.gammaOutput       = true;
+    renderer.shadowMap.enabled  = true;
+    renderer.shadowMap.cullFace = THREE.CullFaceBack;
 
     var scene         = new THREE.Scene();
     var camera        = new THREE.PerspectiveCamera( fov, aspect, near, far );
-    camera.position.z = 20;
+    camera.position.y = 100;
+    camera.lookAt( scene.position );
 
-    scene.add( new THREE.AmbientLight( 0x333333 ) );
+    //scene.add( new THREE.AmbientLight( 0x333333 ) );
 
-    var light = new THREE.DirectionalLight( 0xffffff, 1 );
-    light.position.set( 5, 3, 5 );
-    scene.add( light );
+    var dirLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+    dirLight.position.set( 0, 80, 80 );
+    scene.add( dirLight );
 
-    var radius   = 5,
-        segments = 32,
-        rotation = 6;
+    dirLight.castShadow = true;
 
-    var sphere        = createSphere( radius, segments );
-    sphere.rotation.y = rotation;
-    scene.add( sphere );
+    dirLight.shadowMapWidth  = 2048;
+    dirLight.shadowMapHeight = 2048;
 
-    var clouds        = createClouds( radius, segments );
-    clouds.rotation.y = rotation;
-    scene.add( clouds );
+    var d = 50;
 
-    var stars = createStars( 90, 64 );
-    scene.add( stars );
+    dirLight.shadowCameraLeft   = -d;
+    dirLight.shadowCameraRight  = d;
+    dirLight.shadowCameraTop    = d;
+    dirLight.shadowCameraBottom = -d;
 
-    function createSphere( radius, segments ) {
-        return new THREE.Mesh(
-            new THREE.SphereGeometry( radius, segments, segments ),
-            new THREE.MeshPhongMaterial( {
-                map        : loader.load( 'public/resources/2_no_clouds_4k.jpg' ),
-                bumpMap: loader.load( 'public/resources/elev_bump_4k.jpg' ),
-                bumpScale: 0.05,
-                specularMap: loader.load( 'public/resources/water_4k.png' )
-            } )
-        );
-    }
+    dirLight.shadowCameraFar     = 3500;
+    dirLight.shadowBias          = -0.0001;
+    dirLight.shadowDarkness      = 0.35;
+    dirLight.shadowCameraVisible = true;
 
-    function createClouds( radius, segments ) {
-        return new THREE.Mesh(
-            new THREE.SphereGeometry( radius + 0.1, segments, segments ),
-            new THREE.MeshPhongMaterial( {
-                map        : loader.load( 'public/resources/fair_clouds_4k.png' ),
-                transparent: true
-            } )
-        );
-    }
+    var loader          = new THREE.TextureLoader();
+    var texture         = loader.load( 'public/resources/particle2.png' );
+    var pictureGeometry = new THREE.PlaneBufferGeometry( 20, 20 );
+    var pictureMaterial = new THREE.MeshPhongMaterial( {
+        map        : texture,
+        side       : THREE.DoubleSide,
+        transparent: true,
+        alphaTest  : 0.1
+    } );
 
-    function createStars( radius, segments ) {
-        return new THREE.Mesh(
-            new THREE.SphereGeometry( radius, segments, segments ),
-            new THREE.MeshBasicMaterial( {
-                map : loader.load( 'public/resources/galaxy_starfield.png' ),
-                side: THREE.BackSide
-            } )
-        );
-    }
+    var uniforms       = { texture: { type: "t", value: texture } };
+    var vertexShader   = document.getElementById( 'vertexShaderDepth' ).textContent;
+    var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
+
+    var picture = new THREE.Mesh( pictureGeometry, pictureMaterial );
+    picture.position.set( 0, 20, 0 );
+    picture.castShadow          = true;
+    picture.receiveShadow       = true;
+    picture.customDepthMaterial = new THREE.ShaderMaterial( {
+        uniforms      : uniforms,
+        vertexShader  : vertexShader,
+        fragmentShader: fragmentShader,
+        side          : THREE.DoubleSide
+    } );
+
+    scene.add( picture );
+
+    var groundGeometry   = new THREE.PlaneBufferGeometry( 200, 200 );
+    var groundMaterial   = new THREE.MeshPhongMaterial( {
+        map : loader.load( 'public/resources/bg.jpg' ),
+        side: THREE.DoubleSide,
+        color: 0xff0000
+    } );
+    var ground           = new THREE.Mesh( groundGeometry, groundMaterial );
+    ground.rotation.x    = Math.PI / 2;
+    ground.castShadow    = true;
+    ground.receiveShadow = true;
+    scene.add( ground );
 
     requestAnimationFrame( render );
 
     function render( delta ) {
         renderer.render( scene, camera );
         requestAnimationFrame( render );
-
-        sphere.rotation.y += 0.001;
-        clouds.rotation.y += 0.001;
+        camera.position.x = Math.sin( delta / 1000 ) * 200;
+        camera.position.z = Math.cos( delta / 1000 ) * 200;
+        camera.lookAt( scene.position );
     }
 } );
 

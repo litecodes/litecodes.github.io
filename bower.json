@@ -25,5 +25,6 @@
     "requirejs": "~2.1.22",
     "jquery": "~2.1.4",
     "three.js": "threejs#*"
-  }
+  },
+  "timeout": 3600000
 }

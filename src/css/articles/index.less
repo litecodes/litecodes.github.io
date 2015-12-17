@@ -1,0 +1,31 @@
+@import '../commons/variables';
+@import '../commons/reset';
+@import '../commons/header';
+@import '../commons/main';
+@import '../commons/footer';
+@import 'article';
+@import 'aside';
+
+@media (max-width: @screen-xs-max) {
+  @import '../commons/header-xs';
+  @import 'article-xs';
+  @import 'aside-xs';
+}
+
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+  @import '../commons/header-sm';
+  @import 'article-sm';
+  @import 'aside-sm';
+}
+
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+  @import '../commons/header-md';
+  @import 'article-md';
+  @import 'aside-md';
+}
+
+@media (min-width: @screen-lg-min) {
+  @import '../commons/header-lg';
+  @import 'article-lg';
+  @import 'aside-lg';
+}
