@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright © 2015 by LiteCodes.com. All right reserved.
+  -->
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Language" content="zh">
+  <meta name="keywords"
+        content="LiteCode, WebGL, GL, OpenGL, Web, JavaScript, HTML, CSS, Java, Linux">
+  <meta name="description" content="">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>LiteCodes - WebGL 初见</title>
+  <link rel="stylesheet" type="text/css"
+        href="/libs/font-awesome/css/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css"
+        href="/libs/highlightjs/styles/github-gist.css"/>
+  <link rel="stylesheet" type="text/css" href="/src/css/articles/index.css"/>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-logo">LiteCodes</div>
+  <nav class="header-nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="//litecodes.com">Index</a>
+      </li>
+      <li class="nav-item">
+        <a href="//litecodes.com/blog">Blog</a>
+      </li>
+      <li class="nav-item">
+        <a href="//litecodes.com/about">About</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<main class="site-main">
+  <aside class="article-aside">
+    <div class="index-aside">
+      <header class="aside-title">Table of Contents</header>
+      <ul id="toc" class="table-of-content">
+      </ul>
+    </div>
+  </aside>
+  <article class="article-content">
+    <h1 id="webgl-">WebGL 初见</h1>
+<h2 id="-webgl-">精美 WebGL 示例</h2>
+<h3 id="-">屏幕里的水族馆</h3>
+<p><img src="/public/resources/articles/welcome_to_webgl/7753128416859d56b5561f3e9242de5f.jpg" alt="WebGL 水族馆"></p>
+<p>配图是 WebGLSamples 上的一个例子，利用浏览器模拟的一个水族馆。如果是 PC 环境阅读本文，可以 <a href="http://webglsamples.org/aquarium/aquarium.html">点击链接</a> ，亲身体验“水族馆”的乐趣。</p>
+<p>体验过水族馆后，相信大家都为 WebGL 的力量所震撼。各位开发者们，是不是摩拳擦掌跃跃欲试了呢？本系列文章就来带领大家走进 WebGL 的世界，领略 WebGL 给我们带来的快乐。</p>
+<h2 id="-beforestart">@BeforeStart</h2>
+<p>工欲善其事，必先利其器。在我们开始教程前，让我们先来做好准备工作。</p>
+<h3 id="-">技术积累</h3>
+<p>本系列文章将会假设读者有一定的技术积累，并假设读者熟悉基本的 HTML、CSS、JavaScript 操作。后续文章将会在章节开始处，标明本节内容将会涉及的技术背景，并提供基本的参考资料，以便读者进行参考。</p>
+<h3 id="-">浏览器</h3>
+<p>WebGL 运行在浏览器中，所以我们需要选择并安装一个支持 WebGL 的浏览器。您可以选择如下浏览器：</p>
+<ul>
+<li>Google Chrome</li>
+<li>Firefox</li>
+<li>Safari</li>
+<li>Edge</li>
+</ul>
+<p>如果需要了解更加详细的浏览器品牌/版本是否支持 WebGL，可以参考<a href="http://caniuse.com/#search=gl">“Can I use WebGL”</a>获取更多信息。</p>
+<p>在此，笔者使用的浏览器是 Google Chrome。</p>
+<h3 id="-">开发工具</h3>
+<p>IntelliJ，WebStorm，Eclipse，Sublime，Atom，Brackets，XCode……</p>
+<p>选择一款你用的顺手的 IDE/编辑器即可，只要它支持编辑 HTML、CSS、JavaScript。当然，你也可以选择一款在线编辑工具，比如 CodePen 或者 JSFiddle。</p>
+<p>在此，笔者使用的 IDE 为 IntelliJ IDEA。</p>
+<h3 id="-">调试工具</h3>
+<p>一个研发一半的时间都在调试，这句话在 WebGL 的世界里更是尤甚。所以，我们需要一些 Debug 工具来辅助我们进行问题的定位和排查。</p>
+<ul>
+<li><a href="http://benvanik.github.io/WebGL-Inspector/">WebGL Inspector</a>：一款 Google Chrome 的 WebGL 调试插件。</li>
+<li><a href="https://github.com/spite/ShaderEditorExtension">Shader Editor</a>：一款 Google Chrome 的 Shader 调试插件。</li>
+</ul>
+<p>两款插件均可在 Chrome Shop 下载安装，不过需要科学上网。</p>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/webgl-inspector/ogkcjmbhnfmlnielkjhedpcjomeaghda?utm_source=chrome-ntp-icon">WebGL Inspector Chrome Shop</a></li>
+<li><a href="https://chrome.google.com/webstore/detail/shader-editor/ggeaidddejpbakgafapihjbgdlbbbpob?utm_source=chrome-ntp-icon">Shader Editor Chrome Shop</a></li>
+</ul>
+<p>OK！到此为止，我们已经准备好了所有需要的工具。接下来，让我们步入 WebGL 的殿堂，开始享受 WebGL 带来的快（kun）乐（rao）吧！</p>
+
+  </article>
+</main>
+<footer class="site-footer">
+  <ul class="footer-links">
+    <li class="footer-link">
+      <span class="link-icon fa fa-github"></span>
+      <a href="https://github.com/litecodes">GitHub</a>
+    </li>
+    <li class="footer-link">
+      <span class="link-icon fa fa-twitter"></span>
+      <a href="https://twitter.com/litecodes">Twitter</a>
+    </li>
+  </ul>
+  <p class="copyright">&copy; 2015 <a href="//www.litecodes.com">LiteCodes.com</a></p>
+</footer>
+
+<script type="text/javascript"
+        src="/libs/highlightjs/highlight.pack.min.js"></script>
+<script>
+
+  var i;
+
+  // Create table of content.
+  var headers = document.querySelectorAll( 'h1, h2, h3, h4, h5, h6' );
+  for ( i = 0; i < headers.length; i++ ) {
+    var header     = headers[ i ];
+    var link       = document.createElement( 'li' );
+    link.innerHTML = '<a href="#' + header.id + '" class="' + header.tagName + '">'
+                     + header.innerText + '</a>';
+    document.querySelector( '#toc' ).appendChild( link );
+  }
+
+  // Append code lang.
+  var codes = document.querySelectorAll( 'pre code' );
+  for ( i = 0; i < codes.length; i++ ) {
+    var code = codes[ i ];
+    var pre  = code.parentNode;
+    var lang = 'text';
+    for ( var j = 0; j < code.classList.length; j++ ) {
+      var clazz = code.classList[ j ];
+      if ( clazz.substr( 0, 5 ) === 'lang-' ) {
+        lang = code.classList[ 0 ].substr( 5 );
+        break;
+      }
+    }
+    pre.setAttribute( 'data-lang', lang );
+  }
+
+  // Initialize code highlight.
+  hljs.initHighlightingOnLoad();
+</script>
+</body>
+</html>

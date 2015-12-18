@@ -1,5 +1,5 @@
 .article-content {
-  max-width: 860px;
+  max-width: 940px;
   overflow: hidden;
 
   h1 {
@@ -20,13 +20,81 @@
   }
 
   p {
-    text-indent: 2em;
     line-height: 1.6em;
-    margin-bottom: 1em;
+    margin: 1em 0;
+  }
+
+  a {
+    color: #1ba472;
   }
 
   ul, ol {
     list-style-position: inside;
+    margin-left: 2em;
+    line-height: 1.5em;
+  }
+
+  img {
+    box-sizing: border-box;
+    width: 90%;
+    text-align: center;
+    margin: 0 5%;
+    padding: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 5px #ddd;
+  }
+
+  blockquote {
+    margin: 1em 0 1em 2em;
+    padding: 1px 0;
+    border-left: 3px solid #1ba472;
+  }
+
+  pre {
+    position: relative;
+    width: 90%;
+    margin: 1em auto;
+    padding: 30px 20px 20px 20px;
+    border: 1px solid #333;
+    box-shadow: 3px 3px 10px #ccc;
+    background: url('/public/resources/code-bg.png');
+  }
+
+  pre:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: attr(data-lang);
+    font: bold .5em Consolas;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    margin: -1px 0 0 -1px;
+    padding: 3px 5px;
+    border: 1px solid #333;
+    border-bottom-right-radius: 3px;
+    color: #666;
+    background: #eee;
+  }
+
+  code {
+    background: transparent;
+  }
+
+  .live-code {
+    width: 90%;
+    margin: 1em auto;
+    position: relative;
+    border: 1px solid #999;
+    padding: 45px 20px 20px 20px;
+  }
+  .live-code:before {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    content: 'LIVE DEMO: 'attr(data-caption);
+    color: #999;
+    font: bold .8em 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    letter-spacing: 1px;
   }
 }
 

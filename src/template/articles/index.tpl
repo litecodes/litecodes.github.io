@@ -5,7 +5,9 @@
 <html lang="zh">
 <head>
   <meta charset="UTF-8">
-  <meta name="keywords" content="">
+  <meta http-equiv="Content-Language" content="zh">
+  <meta name="keywords"
+        content="LiteCode, WebGL, GL, OpenGL, Web, JavaScript, HTML, CSS, Java, Linux">
   <meta name="description" content="">
   <meta name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -14,7 +16,7 @@
         href="/libs/font-awesome/css/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css"
         href="/libs/highlightjs/styles/github-gist.css"/>
-  <link rel="stylesheet" type="text/css" href="/public/css/articles.css"/>
+  <link rel="stylesheet" type="text/css" href="/src/css/articles/index.css"/>
 </head>
 <body>
 <header class="site-header">
@@ -63,13 +65,32 @@
         src="/libs/highlightjs/highlight.pack.min.js"></script>
 <script>
 
+  var i;
+
   // Create table of content.
-  var hs = document.querySelectorAll( 'h1, h2, h3, h4, h5, h6' );
-  for ( var i = 0; i < hs.length; i++ ) {
-    var h          = hs[ i ];
+  var headers = document.querySelectorAll( 'h1, h2, h3, h4, h5, h6' );
+  for ( i = 0; i < headers.length; i++ ) {
+    var header     = headers[ i ];
     var link       = document.createElement( 'li' );
-    link.innerHTML = '<a href="#' + h.id + '" class="' + h.tagName + '">' + h.innerText + '</a>';
+    link.innerHTML = '<a href="#' + header.id + '" class="' + header.tagName + '">'
+                     + header.innerText + '</a>';
     document.querySelector( '#toc' ).appendChild( link );
+  }
+
+  // Append code lang.
+  var codes = document.querySelectorAll( 'pre code' );
+  for ( i = 0; i < codes.length; i++ ) {
+    var code = codes[ i ];
+    var pre  = code.parentNode;
+    var lang = 'text';
+    for ( var j = 0; j < code.classList.length; j++ ) {
+      var clazz = code.classList[ j ];
+      if ( clazz.substr( 0, 5 ) === 'lang-' ) {
+        lang = code.classList[ 0 ].substr( 5 );
+        break;
+      }
+    }
+    pre.setAttribute( 'data-lang', lang );
   }
 
   // Initialize code highlight.

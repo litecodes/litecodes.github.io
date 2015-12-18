@@ -25,10 +25,14 @@ module.exports = function ( grunt ) {
                         if ( match && match[ 1 ] ) {
                             context.title = ' - ' + match[ 1 ];
                         }
+
+                        // Replace live code quote
+                        return src.replace( /&#39;/gm, '\'' )
+                                  .replace( /&quot;/gm, '\"' );
                     },
                     markdownOptions: {
                         gfm      : true,
-                        highlight: 'auto'
+                        highlight: 'manual'
                     }
                 },
                 files  : [
