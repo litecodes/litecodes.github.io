@@ -16,7 +16,7 @@
         href="/libs/font-awesome/css/font-awesome.min.css"/>
   <link rel="stylesheet" type="text/css"
         href="/libs/highlightjs/styles/github-gist.css"/>
-  <link rel="stylesheet" type="text/css" href="/src/css/articles/index.css"/>
+  <link rel="stylesheet" type="text/css" href="/public/css/articles.css"/>
 </head>
 <body>
 <header class="site-header">
